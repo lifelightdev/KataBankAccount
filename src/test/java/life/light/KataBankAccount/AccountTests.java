@@ -118,4 +118,23 @@ class AccountTests {
 												"Withdrawal | 2020-01-02 | 10 | 40 \n");
 	}
 
+	@Test
+	void Should_returnHistoryOfOperationWithWithdrawal_When_oneDepositAndSomeWithdrawal(){
+		// Give
+		Account account = new Account();
+		Transaction transactionDeposit50 = new Transaction(LocalDate.of(2020,1,1),50,TypeTransaction.Deposit);
+		Transaction transactionWithdrawal10 = new Transaction(LocalDate.of(2020,1,2),10,TypeTransaction.Withdrawal);
+		Transaction transactionWithdrawal5 = new Transaction(LocalDate.of(2020,1,3),5,TypeTransaction.Withdrawal);
+
+		// When
+		account.deposit(transactionDeposit50);
+		account.withdrawal(transactionWithdrawal10);
+		account.withdrawal(transactionWithdrawal5);
+
+		// Then
+		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 50 | 50 \n"
+											+ "Withdrawal | 2020-01-02 | 10 | 40 \n"
+											+ "Withdrawal | 2020-01-03 | 5 | 35 \n");
+	}
+
 }
