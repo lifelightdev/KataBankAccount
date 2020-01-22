@@ -16,7 +16,7 @@ class AccountTests {
 	Transaction transactionDeposit50 = new Transaction(LocalDate.of(2020,1,1),50,TypeTransaction.Deposit);
 
 	@Test
-	void Shouls_balanceReturn0_When_noTransaction() {
+	void Should_balanceReturn0_When_noTransaction() {
 
 		// Give
 		Account account = new Account();
