@@ -35,4 +35,21 @@ class AccountTests {
 
 	}
 
+
+	@Test
+	void Should_returnBalance_When_someDeposit() {
+
+		// Give
+		Account account = new Account();
+
+		// When
+		account.deposit(1);
+		account.deposit(3);
+		account.deposit(6);
+
+		//Then
+		assertThat(account.getBalance()).isEqualTo(10);
+
+	}
+
 }
