@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Account {
 
-    private int balance = 0;
+    private final static int ZERO = 0;
+    private int balance = ZERO;
     private List<Transaction> transactions = new ArrayList<>();
 
     public int getBalance() {
@@ -23,7 +24,8 @@ public class Account {
     }
 
     public String history() {
-        int balance = 0;
+        String columnSeparator = " | ";
+        int balance = ZERO;
         StringBuilder history = new StringBuilder();
         for (Transaction transaction: transactions){
             if (TypeTransaction.Deposit.equals(transaction.getType())) {
@@ -32,13 +34,13 @@ public class Account {
                 balance = balance - transaction.getAmount();
             }
             history.append(transaction.getType())
-                    .append(" | ")
+                    .append(columnSeparator)
                     .append(transaction.getDate())
-                    .append(" | ")
+                    .append(columnSeparator)
                     .append(transaction.getAmount())
-                    .append(" | ")
+                    .append(columnSeparator)
                     .append(balance)
-                    .append(" \n");
+                    .append(System.getProperty("line.separator"));
         }
         return history.toString();
     }

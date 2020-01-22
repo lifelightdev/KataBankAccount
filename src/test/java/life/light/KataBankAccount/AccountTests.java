@@ -10,10 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class AccountTests {
 
-	Transaction transactionWithdrawal5 = new Transaction(LocalDate.now(),5,TypeTransaction.Withdrawal);
-	Transaction transactionWithdrawal10 = new Transaction(LocalDate.of(2020,1,2),10,TypeTransaction.Withdrawal);
-	Transaction transactionDeposit10 = new Transaction(LocalDate.of(2020,1,1),10,TypeTransaction.Deposit);
-	Transaction transactionDeposit50 = new Transaction(LocalDate.of(2020,1,1),50,TypeTransaction.Deposit);
+	private Transaction transactionWithdrawal5 = new Transaction(LocalDate.now(),5,TypeTransaction.Withdrawal);
+	private Transaction transactionWithdrawal10 = new Transaction(LocalDate.of(2020,1,2),10,TypeTransaction.Withdrawal);
+	private Transaction transactionDeposit10 = new Transaction(LocalDate.of(2020,1,1),10,TypeTransaction.Deposit);
+	private Transaction transactionDeposit50 = new Transaction(LocalDate.of(2020,1,1),50,TypeTransaction.Deposit);
+
+	private final static String LINE_SEPARATOR = System.getProperty("line.separator");
 
 	@Test
 	void Should_balanceReturn0_When_noTransaction() {
@@ -85,7 +87,7 @@ class AccountTests {
 		account.deposit(transactionDeposit10);
 
 		// Then
-		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 10 | 10 \n");
+		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 10 | 10" + LINE_SEPARATOR);
 	}
 
 	@Test
@@ -99,8 +101,8 @@ class AccountTests {
 		account.deposit(transactionDeposit20);
 
 		// Then
-		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 10 | 10 \n" +
-												"Deposit | 2020-01-02 | 20 | 30 \n");
+		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 10 | 10" + LINE_SEPARATOR +
+												"Deposit | 2020-01-02 | 20 | 30" + LINE_SEPARATOR);
 	}
 
 	@Test
@@ -113,8 +115,8 @@ class AccountTests {
 		account.withdrawal(transactionWithdrawal10);
 
 		// Then
-		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 50 | 50 \n" +
-												"Withdrawal | 2020-01-02 | 10 | 40 \n");
+		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 50 | 50" + LINE_SEPARATOR+
+												"Withdrawal | 2020-01-02 | 10 | 40" + LINE_SEPARATOR);
 	}
 
 	@Test
@@ -129,9 +131,9 @@ class AccountTests {
 		account.withdrawal(transactionWithdrawal5);
 
 		// Then
-		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 50 | 50 \n"
-											+ "Withdrawal | 2020-01-02 | 10 | 40 \n"
-											+ "Withdrawal | 2020-01-03 | 5 | 35 \n");
+		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 50 | 50" + LINE_SEPARATOR
+											+ "Withdrawal | 2020-01-02 | 10 | 40" + LINE_SEPARATOR
+											+ "Withdrawal | 2020-01-03 | 5 | 35" + LINE_SEPARATOR);
 	}
 
 }
