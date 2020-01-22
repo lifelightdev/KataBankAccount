@@ -17,15 +17,20 @@ public class Account {
         balance += depositTransaction.getAmount();
     }
 
-    public void withdrawal(int amount) {
-        balance -= amount;
+    public void withdrawal(Transaction withdrawalTransaction) {
+        transactions.add(withdrawalTransaction);
+        balance -= withdrawalTransaction.getAmount();
     }
 
     public String history() {
         int balance = 0;
         StringBuilder history = new StringBuilder();
         for (Transaction transaction: transactions){
-            balance = balance + transaction.getAmount();
+            if (TypeTransaction.Deposit.equals(transaction.getType())) {
+                balance = balance + transaction.getAmount();
+            } else {
+                balance = balance - transaction.getAmount();
+            }
             history.append(transaction.getType())
                     .append(" | ")
                     .append(transaction.getDate())

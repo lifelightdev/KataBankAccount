@@ -43,10 +43,11 @@ class AccountTests {
 		// Give
 		Account account = new Account();
 		Transaction transactionDeposit = new Transaction(LocalDate.now(),15,TypeTransaction.Deposit);
+		Transaction transactionWithdrawal = new Transaction(LocalDate.now(),5,TypeTransaction.Withdrawal);
 
 		// When
 		account.deposit(transactionDeposit);
-		account.withdrawal(5);
+		account.withdrawal(transactionWithdrawal);
 
 		//Then
 		assertThat(account.getBalance()).isEqualTo(10);
@@ -59,11 +60,13 @@ class AccountTests {
 		// Give
 		Account account = new Account();
 		Transaction transactionDeposit = new Transaction(LocalDate.now(),15,TypeTransaction.Deposit);
+		Transaction transactionWithdrawal5 = new Transaction(LocalDate.now(),5,TypeTransaction.Withdrawal);
+		Transaction transactionWithdrawal2 = new Transaction(LocalDate.now(),2,TypeTransaction.Withdrawal);
 
 		// When
 		account.deposit(transactionDeposit);
-		account.withdrawal(5);
-		account.withdrawal(2);
+		account.withdrawal(transactionWithdrawal5);
+		account.withdrawal(transactionWithdrawal2);
 
 		//Then
 		assertThat(account.getBalance()).isEqualTo(8);
@@ -97,6 +100,22 @@ class AccountTests {
 		// Then
 		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 10 | 10 \n" +
 												"Deposit | 2020-01-02 | 20 | 30 \n");
+	}
+
+	@Test
+	void Should_returnHistoryOfOperationWithWithdrawal_When_oneDepositAndOneWithdrawal(){
+		// Give
+		Account account = new Account();
+		Transaction transactionDeposit50 = new Transaction(LocalDate.of(2020,1,1),50,TypeTransaction.Deposit);
+		Transaction transactionWithdrawal10 = new Transaction(LocalDate.of(2020,1,2),10,TypeTransaction.Withdrawal);
+
+		// When
+		account.deposit(transactionDeposit50);
+		account.withdrawal(transactionWithdrawal10);
+
+		// Then
+		assertThat(account.history()).isEqualTo("Deposit | 2020-01-01 | 50 | 50 \n" +
+												"Withdrawal | 2020-01-02 | 10 | 40 \n");
 	}
 
 }

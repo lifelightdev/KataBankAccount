@@ -2,5 +2,5 @@ package life.light.KataBankAccount;
 
 public enum TypeTransaction {
     Deposit,
-    Withrawal
+    Withdrawal
 }
