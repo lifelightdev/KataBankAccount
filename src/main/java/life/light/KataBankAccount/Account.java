@@ -15,19 +15,19 @@ public class Account {
 
     public void deposit(Transaction depositTransaction) {
         transactions.add(depositTransaction);
-        balance += depositTransaction.getAmount();
+        balance = depositTransaction.calculateBalance(balance);
     }
 
     public void withdrawal(Transaction withdrawalTransaction) {
         transactions.add(withdrawalTransaction);
-        balance -= withdrawalTransaction.getAmount();
+        balance = withdrawalTransaction.calculateBalance(balance);
     }
 
     public String history() {
         int balance = ZERO;
         StringBuilder history = new StringBuilder();
         for (Transaction transaction: transactions){
-            balance = calculateBalance(balance, transaction);
+            balance = transaction.calculateBalance(balance);
             history.append(getLineOfHistory(balance, transaction));
         }
         return history.toString();
@@ -46,12 +46,4 @@ public class Account {
         return line;
     }
 
-    private int calculateBalance(int balance, Transaction transaction) {
-        if (TypeTransaction.Deposit.equals(transaction.getType())) {
-            balance = balance + transaction.getAmount();
-        } else {
-            balance = balance - transaction.getAmount();
-        }
-        return balance;
-    }
 }
