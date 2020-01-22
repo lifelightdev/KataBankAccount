@@ -1,15 +1,20 @@
 package life.light.KataBankAccount;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Account {
 
     private int balance = 0;
+    private List<Transaction> transactions = new ArrayList<>();
 
     public int getBalance() {
         return balance;
     }
 
-    public void deposit(int amount) {
-        balance += amount;
+    public void deposit(Transaction depositTransaction) {
+        transactions.add(depositTransaction);
+        balance += depositTransaction.getAmount();
     }
 
     public void withdrawal(int amount) {
@@ -17,6 +22,19 @@ public class Account {
     }
 
     public String history() {
-        return "Deposit | 01/01/2020 | 10,00 | 10,00";
+        int balance = 0;
+        StringBuilder history = new StringBuilder();
+        for (Transaction transaction: transactions){
+            balance = balance + transaction.getAmount();
+            history.append(transaction.getType())
+                    .append(" | ")
+                    .append(transaction.getDate())
+                    .append(" | ")
+                    .append(transaction.getAmount())
+                    .append(" | ")
+                    .append(balance)
+                    .append(" \n");
+        }
+        return history.toString();
     }
 }
