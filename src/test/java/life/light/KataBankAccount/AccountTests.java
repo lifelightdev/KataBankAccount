@@ -67,6 +67,18 @@ class AccountTests {
 
 	}
 
+	@Test
+	void Should_returnHistoryOfOneOperation_When_deposit(){
+		 // Give
+		Account account = new Account();
+
+		// When
+		account.deposit(10);
+
+		// Then
+		assertThat(account.history()).isEqualTo("Deposit | 01/01/2020 | 10,00 | 10,00");
+	}
+
 
 
 }

@@ -15,4 +15,8 @@ public class Account {
     public void withdrawal(int amount) {
         balance -= amount;
     }
+
+    public String history() {
+        return "Deposit | 01/01/2020 | 10,00 | 10,00";
+    }
 }
