@@ -24,24 +24,34 @@ public class Account {
     }
 
     public String history() {
-        String columnSeparator = " | ";
         int balance = ZERO;
         StringBuilder history = new StringBuilder();
         for (Transaction transaction: transactions){
-            if (TypeTransaction.Deposit.equals(transaction.getType())) {
-                balance = balance + transaction.getAmount();
-            } else {
-                balance = balance - transaction.getAmount();
-            }
-            history.append(transaction.getType())
-                    .append(columnSeparator)
-                    .append(transaction.getDate())
-                    .append(columnSeparator)
-                    .append(transaction.getAmount())
-                    .append(columnSeparator)
-                    .append(balance)
-                    .append(System.getProperty("line.separator"));
+            balance = calculateBalance(balance, transaction);
+            history.append(getLineOfHistory(balance, transaction));
         }
         return history.toString();
+    }
+
+    private String getLineOfHistory(int balance, Transaction transaction) {
+        String columnSeparator = " | ";
+        String line = transaction.getType() +
+                columnSeparator +
+                transaction.getDate() +
+                columnSeparator +
+                transaction.getAmount() +
+                columnSeparator +
+                balance +
+                System.getProperty("line.separator");
+        return line;
+    }
+
+    private int calculateBalance(int balance, Transaction transaction) {
+        if (TypeTransaction.Deposit.equals(transaction.getType())) {
+            balance = balance + transaction.getAmount();
+        } else {
+            balance = balance - transaction.getAmount();
+        }
+        return balance;
     }
 }
