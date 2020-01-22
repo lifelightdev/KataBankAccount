@@ -22,7 +22,7 @@ class AccountTests {
 	}
 
 	@Test
-	void Shouls_balanceReturn1_When_firstDeposit1() {
+	void Should_balanceReturn1_When_firstDeposit1() {
 
 		// Give
 		Account account = new Account();
