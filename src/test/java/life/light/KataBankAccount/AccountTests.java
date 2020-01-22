@@ -17,7 +17,7 @@ class AccountTests {
 		// When
 
 		//Then
-		assertThat(account.balance()).isEqualTo(0);
+		assertThat(account.getBalance()).isEqualTo(0);
 
 	}
 
@@ -31,7 +31,7 @@ class AccountTests {
 		account.deposit(1);
 
 		//Then
-		assertThat(account.balance()).isEqualTo(1);
+		assertThat(account.getBalance()).isEqualTo(1);
 
 	}
 

@@ -4,7 +4,7 @@ public class Account {
 
     private int balance = 0;
 
-    public int balance() {
+    public int getBalance() {
         return balance;
     }
 
