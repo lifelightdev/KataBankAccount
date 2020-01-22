@@ -4,21 +4,8 @@ import java.time.LocalDate;
 
 public class Withdrawal extends Transaction {
 
-    private LocalDate date;
-    private int amount;
-
     public Withdrawal(LocalDate date, int amount) {
-        super();
-        this.date = date;
-        this.amount = amount;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public int getAmount() {
-        return amount;
+        super(date, amount);
     }
 
     @Override

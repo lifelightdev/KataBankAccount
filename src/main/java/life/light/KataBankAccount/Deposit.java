@@ -4,21 +4,8 @@ import java.time.LocalDate;
 
 public class Deposit extends Transaction {
 
-    private LocalDate date;
-    private int amount;
-
     public Deposit(LocalDate date, int amount) {
-        super();
-        this.date = date;
-        this.amount = amount;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public int getAmount() {
-        return amount;
+        super(date, amount);
     }
 
     @Override

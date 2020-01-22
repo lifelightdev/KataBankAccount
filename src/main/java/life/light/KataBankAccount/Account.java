@@ -13,14 +13,14 @@ public class Account {
         return balance;
     }
 
-    public void deposit(Transaction depositTransaction) {
-        transactions.add(depositTransaction);
-        balance = depositTransaction.calculateBalance(balance);
+    public void deposit(Deposit deposit) {
+        transactions.add(deposit);
+        balance = deposit.calculateBalance(balance);
     }
 
-    public void withdrawal(Transaction withdrawalTransaction) {
-        transactions.add(withdrawalTransaction);
-        balance = withdrawalTransaction.calculateBalance(balance);
+    public void withdrawal(Withdrawal withdrawal) {
+        transactions.add(withdrawal);
+        balance = withdrawal.calculateBalance(balance);
     }
 
     public String history() {
